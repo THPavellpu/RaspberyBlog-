@@ -1,0 +1,55 @@
+{% extends "blog/base.html" %}
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <article class="post">
+        {% if post.image %}
+            <img src="{{ post.image.url }}" class="img-fluid rounded mb-4" style="height: 200px; object-fit: cover; " alt="{{ post.title }}">
+        {% endif %}
+
+        <h1 class="mb-3">{{ post.title }}</h1>
+        <p class="text-muted">By {{ post.author }} | {{ post.created_at|date:"F j, Y" }}</p>
+        <hr>
+
+        <!-- 🟡 Placeholder for Google AdSense Ad -->
+        <!-- <div class="adsense-slot">AdSense Code Goes Here</div> -->
+
+        <section class="post-content my-4">
+            <p>{{ post.content|linebreaks }}</p>
+        </section>
+
+        <!-- 🟡 Another AdSense slot can be placed here if needed -->
+        <!-- <div class="adsense-slot">AdSense Code Goes Here</div> -->
+
+        <section class="post-interactions mt-5">
+            <form action="{% url 'like_post' post.id %}" method="POST" class="mb-3">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-primary">👍 Like</button>
+                <span>{{ post.likes.count }} likes</span>
+            </form>
+        </section>
+
+        <section class="comments mt-4">
+            <h4>Comments</h4>
+            {% for comment in comments %}
+                <div class="border p-2 rounded mb-2">
+                    <strong>{{ comment.author_name }}</strong><br>
+                    <span>{{ comment.text }}</span>
+                </div>
+            {% empty %}
+                <p>No comments yet.</p>
+            {% endfor %}
+        </section>
+
+        <section class="comment-form mt-4">
+            <h5>Leave a Comment</h5>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-success">Submit</button>
+            </form>
+        </section>
+    </article>
+</div>
+{% endblock %}

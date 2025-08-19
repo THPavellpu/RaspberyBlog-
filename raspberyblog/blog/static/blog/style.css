@@ -1,0 +1,27 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.container {
+    min-height: 70vh;
+}
+
+h1, h2, h3, h4, h5 {
+    color: #343a40;
+}
+
+footer {
+    font-size: 0.9rem;
+}
+
+form input, form textarea {
+    margin-bottom: 1rem;
+}
+card-img-top{
+    max-width: 100px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+  margin-bottom: 10px;
+}
